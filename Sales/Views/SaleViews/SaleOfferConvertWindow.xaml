@@ -1,0 +1,273 @@
+﻿<Controls:MetroWindow
+    x:Class="Sales.Views.SaleViews.SaleOfferConvertWindow"
+      xml:lang="ar-EG"
+        xmlns:Helpers="clr-namespace:Sales.Helpers"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Custom="http://www.galasoft.ch/mvvmlight"
+     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="تحويل لفاتورة مبيعات" 
+        Height="600"
+        Width="1000"
+      ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        ShowTitleBar="True"
+     Background="{DynamicResource ControlBorderBrush}"
+        FlowDirection="RightToLeft"
+        DataContext="{Binding SaleOfferConvert, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\Skins\MainSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Margin="5,0">العميل</TextBlock>
+            <ComboBox  Name="Focus" Width="300" Margin="5,0" Helpers:FocusExtension.IsFocused="{Binding IsFocused}" ItemsSource="{Binding Clients}" SelectedValuePath="ID" DisplayMemberPath="Name" 
+                  SelectedItem="{Binding SelectedClient}" SelectedValue="{Binding NewSale.ClientID,UpdateSourceTrigger=PropertyChanged}" IsEditable="True" Style="{StaticResource ComboBoxStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <Custom:EventToCommand Command="{Binding GetClientAccount}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Margin="5,0">التاريخ</TextBlock>
+            <DatePicker Margin="5,0" VerticalAlignment="Center" Width="300" SelectedDate="{Binding NewSale.Date}" Style="{StaticResource DatePickerStyle}"></DatePicker>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Margin="5,0">المندوب</TextBlock>
+            <ComboBox   Width="300" Margin="5,0" ItemsSource="{Binding Salespersons}" SelectedValuePath="ID" DisplayMemberPath="Name" 
+                  SelectedItem="{Binding SelectedSalesperson}" SelectedValue="{Binding NewSale.SalespersonID,UpdateSourceTrigger=PropertyChanged}" IsEditable="True" Style="{StaticResource ComboBoxStyle}">
+            </ComboBox>
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Margin="5,0">القائم بالطبع</TextBlock>
+            <ComboBox   Width="300" Margin="5,0" Text="{Binding NewSale.PrintingMan}"  Style="{StaticResource ComboBoxStyle}">
+                <ComboBoxItem>حماده</ComboBoxItem>
+                <ComboBoxItem>حازم</ComboBoxItem>
+            </ComboBox>
+
+        </StackPanel>
+
+        <StackPanel Name="pnl1" Orientation="Horizontal" Grid.Row="2">
+            <Button FocusManager.FocusedElement="{Binding ElementName=PriceFocus}"  Command="{Binding BrowseCategories}" BorderThickness="0" Style="{DynamicResource MetroCircleButtonStyle}"
+                Margin="5,0" >
+                <iconPacks:PackIconOcticons Kind="Browser" Height="40" Width="40"/>
+            </Button>
+            <TextBox Margin="5,0" Width="120" Height="40" FontSize="16" FontWeight="Bold" FontFamily="calibri" IsEnabled="False" VerticalContentAlignment="Center"
+                      Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.AutoWatermark="True"
+                         Controls:TextBoxHelper.Watermark="الشركة"  Text="{Binding NewSaleCategory.Company, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Margin="5,0" Width="250" Height="40" FontSize="16"  FontWeight="Bold" FontFamily="calibri" IsEnabled="False" VerticalContentAlignment="Center"
+                      Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.AutoWatermark="True"
+                         Controls:TextBoxHelper.Watermark="الصنف"  Text="{Binding NewSaleCategory.Category, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+
+            <Controls:NumericUpDown Name="PriceFocus" HideUpDownButtons="True" HorizontalContentAlignment="Left" Margin="5,0" Width="100" Height="40" FontSize="16"  FontWeight="Bold" FontFamily="Veranda" Minimum="0.01" VerticalContentAlignment="Center"
+                      Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.AutoWatermark="True"
+                         Controls:TextBoxHelper.Watermark="السعر"  Value="{Binding NewSaleCategory.Price, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" >
+                <Controls:NumericUpDown.InputBindings>
+                    <KeyBinding Command="{Binding Path=AddToBill}" Key="Enter" />
+                </Controls:NumericUpDown.InputBindings>
+            </Controls:NumericUpDown>
+
+            <Controls:NumericUpDown HideUpDownButtons="True" HorizontalContentAlignment="Left" Margin="5,0" Width="100" Height="40" FontSize="16"  FontWeight="Bold" FontFamily="Veranda" Minimum="0.01" VerticalContentAlignment="Center"
+                      Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.AutoWatermark="True"
+                         Controls:TextBoxHelper.Watermark="الكمية"  Value="{Binding NewSaleCategory.Qty, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" >
+                <Controls:NumericUpDown.InputBindings>
+                    <KeyBinding Command="{Binding Path=AddToBill}" Key="Enter" />
+                </Controls:NumericUpDown.InputBindings>
+            </Controls:NumericUpDown>
+
+            <Controls:NumericUpDown HideUpDownButtons="True" HorizontalContentAlignment="Left" Margin="5,0" Width="100" Height="40" FontSize="16"  FontWeight="Bold" FontFamily="Veranda" Minimum="0" VerticalContentAlignment="Center"
+                      Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.AutoWatermark="True"
+                         Controls:TextBoxHelper.Watermark="الخصم %"  Value="{Binding NewSaleCategory.Discount, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" >
+                <Controls:NumericUpDown.InputBindings>
+                    <KeyBinding Command="{Binding Path=AddToBill}" Key="Enter" />
+                </Controls:NumericUpDown.InputBindings>
+            </Controls:NumericUpDown>
+            <Button Name="btn1" Command="{Binding AddToBill}" BorderThickness="0" Style="{DynamicResource MetroCircleButtonStyle}"
+                Margin="5,0" >
+                <iconPacks:PackIconEntypo Kind="AddToList" Height="40" Width="40"/>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="0" Margin="5,0" 
+            ItemsSource="{Binding SaleCategories}"
+                SelectedItem="{Binding SelectedSaleCategory}"
+                  HeadersVisibility="All"
+                  SelectionUnit="FullRow"
+                  IsManipulationEnabled="False"
+                      CanUserDeleteRows="False"
+                      CanUserAddRows="False"
+                  AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True"  Header="الشركة" Width="1.5*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Company}" />
+                    <DataGridTextColumn IsReadOnly="True"  Header="الصنف" Width="3*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Category}" />
+                    <DataGridTextColumn IsReadOnly="True"  Header="السعر" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Price}" />
+                    <DataGridTextColumn IsReadOnly="True"  Header="الكمية" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Qty}" />
+                    <DataGridTextColumn IsReadOnly="True"  Header="الخصم %" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Discount}" />
+                    <DataGridTextColumn IsReadOnly="True"  Header="إجمالى بعد الخصم" Width="1.5*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding PriceTotalAfterDiscount,StringFormat={}{0:0.00;(0.00)}}" />
+                    <DataGridTemplateColumn  Header="عرض التفاصيل" Width="1.2*" HeaderStyle="{StaticResource ColumnHeaderStyle}" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.ShowDetials, 
+                        RelativeSource={RelativeSource AncestorType={x:Type Controls:MetroWindow}}}"   Style="{DynamicResource MetroCircleButtonStyle}" BorderThickness="0" >
+                                    <iconPacks:PackIconMaterial Kind="Eye" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn  Header="تعديل" Width="0.75*" HeaderStyle="{StaticResource ColumnHeaderStyle}" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.Edit, 
+                        RelativeSource={RelativeSource AncestorType={x:Type Controls:MetroWindow}}}"   Style="{DynamicResource MetroCircleButtonStyle}" BorderThickness="0" >
+                                    <iconPacks:PackIconEntypo Kind="Edit" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn  Header="حذف" Width="0.75*" HeaderStyle="{StaticResource ColumnHeaderStyle}" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  Command="{Binding DataContext.Delete, 
+                        RelativeSource={RelativeSource AncestorType={x:Type Controls:MetroWindow}}}"  Style="{DynamicResource MetroCircleButtonStyle}"  BorderThickness="0"   >
+                                    <iconPacks:PackIconMaterial Kind="DeleteForever" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+                <DataGrid.Style>
+                    <Style BasedOn="{StaticResource MetroDataGrid}"
+                       TargetType="{x:Type DataGrid}">
+                        <Setter Property="AlternatingRowBackground"
+                            Value="{DynamicResource GrayBrush10}" />
+                    </Style>
+                </DataGrid.Style>
+            </DataGrid>
+
+            <DataGrid Grid.Column="1" Margin="5,0" 
+            ItemsSource="{Binding OldPrices}"
+                SelectedItem="{Binding SelectedOldPrice}"
+                      IsSynchronizedWithCurrentItem="True"
+                  HeadersVisibility="All"
+                  SelectionUnit="FullRow"
+                  IsManipulationEnabled="False"
+                      CanUserDeleteRows="False"
+                      CanUserAddRows="False"
+                  AutoGenerateColumns="False" >
+                <DataGrid.InputBindings>
+                    <MouseBinding
+            MouseAction="LeftDoubleClick"
+            Command="{Binding SelectPrice}" CommandParameter="{Binding OldPrices/}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True"  Header="السعر" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Price}" />
+                    <DataGridTextColumn IsReadOnly="True"  Header="الخصم %" Width="0.75*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Discount}" />
+                    <DataGridTemplateColumn  Header="اختيار" Width="0.5*" HeaderStyle="{StaticResource ColumnHeaderStyle}" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  Command="{Binding DataContext.SelectPrice, 
+                        RelativeSource={RelativeSource AncestorType={x:Type Controls:MetroWindow}}}"  Style="{DynamicResource MetroCircleButtonStyle}"  BorderThickness="0"   >
+                                    <iconPacks:PackIconMaterial Kind="SelectInverse" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+                <DataGrid.Style>
+                    <Style BasedOn="{StaticResource MetroDataGrid}"
+                       TargetType="{x:Type DataGrid}">
+                        <Setter Property="AlternatingRowBackground"
+                            Value="{DynamicResource GrayBrush10}" />
+                    </Style>
+                </DataGrid.Style>
+            </DataGrid>
+        </Grid>
+
+
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockAddUpdateStyle}" >إجمالى الفاتورة</TextBlock>
+            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1"  Name="Price" Margin="5,0" IsEnabled="False" Width="200"  Value="{Binding NewSale.Price, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"  Style="{StaticResource TextBlockAddUpdateStyle}" >الإجمالى بعد الخصم</TextBlock>
+            <Controls:NumericUpDown Grid.Row="0" Grid.Column="3" IsEnabled="False" Width="200"  Value="{Binding NewSale.PriceAfterDiscount}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Grid.Row="0" Grid.Column="4"  Style="{StaticResource TextBlockAddUpdateStyle}" >المتبقى من قبل</TextBlock>
+            <Controls:NumericUpDown Name="OldDebt" Grid.Row="0" Grid.Column="5"  IsEnabled="False" Width="200"  Value="{Binding NewSale.OldDebt, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Grid.Row="1" Grid.Column="0">مصاريف النقل</TextBlock>
+            <Controls:NumericUpDown Name="TransportCost" Minimum="0" Grid.Row="1" Grid.Column="1" Width="200"  Value="{Binding NewSale.TransportCost, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Grid.Row="1" Grid.Column="2">إجمالى المطلوب</TextBlock>
+            <Controls:NumericUpDown  Grid.Row="1" Grid.Column="3"  Width="200" IsEnabled="False"  Value="{Binding NewSale.PriceTotal ,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Grid.Row="2" Grid.Column="0">ما تم سداده</TextBlock>
+            <Controls:NumericUpDown Name="Paid" Grid.Row="2" Grid.Column="1"  Width="200"  Value="{Binding NewSale.Paid, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Grid.Row="2" Grid.Column="2"> المتبقى</TextBlock>
+            <Controls:NumericUpDown  Grid.Row="2" Grid.Column="3" IsEnabled="False" Width="200"  Value="{Binding NewSale.NewDebt, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Grid.Column="5" Grid.Row="2" Style="{StaticResource TextBlockAddUpdateStyle}" Text="{Binding Report}"> 
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseEnter">
+            <i:InvokeCommandAction Command="{Binding ShowReport}" />
+        </i:EventTrigger>
+         <i:EventTrigger EventName="MouseLeave">
+      <i:InvokeCommandAction Command="{Binding HideReport}"/>
+       </i:EventTrigger>
+  </i:Interaction.Triggers>
+            </TextBlock>
+        </Grid>
+
+
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="5">
+            <Button Name="btn2"  Height="30" Command="{Binding Save}" FocusManager.FocusedElement="{Binding ElementName=Focus}" Style="{StaticResource SquareButtonStyle}" Width="100"    >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="حفظ"  Style="{StaticResource TextBlockStyle}" Margin="10,0"></TextBlock>
+                    <iconPacks:PackIconModern Kind="Save" />
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
+
+</Controls:MetroWindow>

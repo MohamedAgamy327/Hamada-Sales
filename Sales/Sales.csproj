@@ -1,0 +1,808 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3784763-3F18-4AD6-9472-76961992838F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sales</RootNamespace>
+    <AssemblyName>Sales</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SalesICO.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.1.9.1\lib\net45\MahApps.Metro.IconPacks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="sapbusinessobjects.wpf.viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFTextBoxAutoComplete, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFTextBoxAutoComplete.1.0.5\lib\net40\WPFTextBoxAutoComplete.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helpers\BindableBase.cs" />
+    <Compile Include="Helpers\CheckUrlConverter.cs" />
+    <Compile Include="Helpers\CurrencyInfo.cs" />
+    <Compile Include="Helpers\FocusExtension.cs" />
+    <Compile Include="Helpers\GreaterThanConverter.cs" />
+    <Compile Include="Helpers\LastSaleConverter.cs" />
+    <Compile Include="Helpers\LastSupplyConverter.cs" />
+    <Compile Include="Helpers\RequiredCategoryConverter.cs" />
+    <Compile Include="Helpers\Secure.cs" />
+    <Compile Include="Helpers\ToWord.cs" />
+    <Compile Include="Helpers\ValidatableBindableBase.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\SaleOfferCategory.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\ClientAccount.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Safe.cs" />
+    <Compile Include="Models\Sale.cs" />
+    <Compile Include="Models\SaleCategory.cs" />
+    <Compile Include="Models\SaleOffer.cs" />
+    <Compile Include="Models\SaleRecall.cs" />
+    <Compile Include="Models\SalesDB.cs" />
+    <Compile Include="Models\Salesperson.cs" />
+    <Compile Include="Models\Spending.cs" />
+    <Compile Include="Models\StatementVM.cs" />
+    <Compile Include="Models\Supply.cs" />
+    <Compile Include="Models\SupplyCategory.cs" />
+    <Compile Include="Models\SupplyFuture.cs" />
+    <Compile Include="Models\SupplyOffer.cs" />
+    <Compile Include="Models\SupplyOfferCategory.cs" />
+    <Compile Include="Models\SupplyPremium.cs" />
+    <Compile Include="Models\SupplyRecall.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Reports\ClientAccountReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ClientAccountReportDiscount.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DS.cs">
+      <DependentUpon>DS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportWindow.xaml.cs">
+      <DependentUpon>ReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RequiredCategoryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SupplyOfferReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SaleOfferReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SaleReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SupplyReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\CategoryServices.cs" />
+    <Compile Include="Services\ClientAccountServices.cs" />
+    <Compile Include="Services\ClientServices.cs" />
+    <Compile Include="Services\CompanyServices.cs" />
+    <Compile Include="Services\SafeServices.cs" />
+    <Compile Include="Services\SaleCategoryServices.cs" />
+    <Compile Include="Services\SaleOfferCategoryServices.cs" />
+    <Compile Include="Services\SaleOfferServices.cs" />
+    <Compile Include="Services\SaleRecallServices.cs" />
+    <Compile Include="Services\SaleServices.cs" />
+    <Compile Include="Services\SalespersonServices.cs" />
+    <Compile Include="Services\SpendingServices.cs" />
+    <Compile Include="Services\SupplyCategoryServices.cs" />
+    <Compile Include="Services\SupplyFutureServices.cs" />
+    <Compile Include="Services\SupplyOfferCategoryServices.cs" />
+    <Compile Include="Services\SupplyOfferServices.cs" />
+    <Compile Include="Services\SupplyPremiumServices.cs" />
+    <Compile Include="Services\SupplyRecallServices.cs" />
+    <Compile Include="Services\SupplyServices.cs" />
+    <Compile Include="Services\UserServices.cs" />
+    <Compile Include="SplashScreen\DispatcherHelper.cs" />
+    <Compile Include="SplashScreen\MessageListener.cs" />
+    <Compile Include="SplashScreen\Splasher.cs" />
+    <Compile Include="SplashScreen\SplashScreenWindow.xaml.cs">
+      <DependentUpon>SplashScreenWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ClientViewModels\ClientAccountDisplayViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ClientAccountReportViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ClientDisplayViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SafeViewModels\SafeDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SafeViewModels\SafeReportViewModel.cs" />
+    <Compile Include="ViewModels\SafeViewModels\SafeViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleAddViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleReportViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleShowViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SalespersonDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleUpdateViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleViewModel.cs" />
+    <Compile Include="ViewModels\SpendingViewModels\SpendingDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SpendingViewModels\SpendingReportViewModel.cs" />
+    <Compile Include="ViewModels\SpendingViewModels\SpendingViewModel.cs" />
+    <Compile Include="ViewModels\StoreViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\StoreViewModels\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\StoreViewModels\CategoryRequiredViewModel.cs" />
+    <Compile Include="ViewModels\StoreViewModels\StoreViewModel.cs" />
+    <Compile Include="ViewModels\SupplyFutureViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyAddViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyFutureDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleOfferAddViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleOfferConvertViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleOfferDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleOfferShowViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModels\SaleOfferUpdateViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyOfferAddViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyOfferConvertViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyOfferDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyOfferShowViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyOfferUpdateViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyReportViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyShowViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyUpdateViewModel.cs" />
+    <Compile Include="ViewModels\SupplyViewModels\SupplyViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\ClientViews\ClientAccountAddDialog.xaml.cs">
+      <DependentUpon>ClientAccountAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientAccountDisplayUserControl.xaml.cs">
+      <DependentUpon>ClientAccountDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientAccountReportUserControl.xaml.cs">
+      <DependentUpon>ClientAccountReportUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientAccountShowDialog.xaml.cs">
+      <DependentUpon>ClientAccountShowDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientAddDialog.xaml.cs">
+      <DependentUpon>ClientAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientDisplayUserControl.xaml.cs">
+      <DependentUpon>ClientDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientUpdateDialog.xaml.cs">
+      <DependentUpon>ClientUpdateDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientViews\ClientWindow.xaml.cs">
+      <DependentUpon>ClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainViews\BackupDialog.xaml.cs">
+      <DependentUpon>BackupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainViews\LoginDialog.xaml.cs">
+      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainViews\RestoreBackupDialog.xaml.cs">
+      <DependentUpon>RestoreBackupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainViews\SupplyFutureDisplayWindow.xaml.cs">
+      <DependentUpon>SupplyFutureDisplayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainViews\UserDialog.xaml.cs">
+      <DependentUpon>UserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SafeViews\SafeAddDialog.xaml.cs">
+      <DependentUpon>SafeAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SafeViews\SafeDetailsDialog.xaml.cs">
+      <DependentUpon>SafeDetailsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SafeViews\SafeDisplayUserControl.xaml.cs">
+      <DependentUpon>SafeDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SafeViews\SafeReportUserControl.xaml.cs">
+      <DependentUpon>SafeReportUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SafeViews\SafeWindow.xaml.cs">
+      <DependentUpon>SafeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\CategoriesShowDialog.xaml.cs">
+      <DependentUpon>CategoriesShowDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleAddWindow.xaml.cs">
+      <DependentUpon>SaleAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleCategoryInfromationDialog.xaml.cs">
+      <DependentUpon>SaleCategoryInfromationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleDisplayUserControl.xaml.cs">
+      <DependentUpon>SaleDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleOfferAddWindow.xaml.cs">
+      <DependentUpon>SaleOfferAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleOfferConvertWindow.xaml.cs">
+      <DependentUpon>SaleOfferConvertWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleOfferDisplayUserControl.xaml.cs">
+      <DependentUpon>SaleOfferDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleOfferShowWindow.xaml.cs">
+      <DependentUpon>SaleOfferShowWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleOfferUpdateWindow.xaml.cs">
+      <DependentUpon>SaleOfferUpdateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleRecallDialog.xaml.cs">
+      <DependentUpon>SaleRecallDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleReportUserControl.xaml.cs">
+      <DependentUpon>SaleReportUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleShowWindow.xaml.cs">
+      <DependentUpon>SaleShowWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SalespersonAccountShowDialog.xaml.cs">
+      <DependentUpon>SalespersonAccountShowDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SalespersonAddDialog.xaml.cs">
+      <DependentUpon>SalespersonAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SalespersonDisplayUserControl.xaml.cs">
+      <DependentUpon>SalespersonDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleUpdateWindow.xaml.cs">
+      <DependentUpon>SaleUpdateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleViews\SaleWindow.xaml.cs">
+      <DependentUpon>SaleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpendingViews\SpendingAddDialog.xaml.cs">
+      <DependentUpon>SpendingAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpendingViews\SpendingDisplayUserControl.xaml.cs">
+      <DependentUpon>SpendingDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpendingViews\SpendingReportUserControl.xaml.cs">
+      <DependentUpon>SpendingReportUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpendingViews\SpendingWindow.xaml.cs">
+      <DependentUpon>SpendingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\CategoryAddDialog.xaml.cs">
+      <DependentUpon>CategoryAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\CategoryInformationDialog.xaml.cs">
+      <DependentUpon>CategoryInformationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\CategoryRequiredUserControl.xaml.cs">
+      <DependentUpon>CategoryRequiredUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\CategoryUpdateDialog.xaml.cs">
+      <DependentUpon>CategoryUpdateDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\CategoryUserControl.xaml.cs">
+      <DependentUpon>CategoryUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\CompanyAddDialog.xaml.cs">
+      <DependentUpon>CompanyAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\CompanyUserControl.xaml.cs">
+      <DependentUpon>CompanyUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StoreViews\StoreWindow.xaml.cs">
+      <DependentUpon>StoreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\CategoriesShowDialog.xaml.cs">
+      <DependentUpon>CategoriesShowDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyAddWindow.xaml.cs">
+      <DependentUpon>SupplyAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyCategoryInfromationDialog.xaml.cs">
+      <DependentUpon>SupplyCategoryInfromationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyDisplayUserControl.xaml.cs">
+      <DependentUpon>SupplyDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyFutureDisplayUserControl.xaml.cs">
+      <DependentUpon>SupplyFutureDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyOfferAddWindow.xaml.cs">
+      <DependentUpon>SupplyOfferAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyOfferConvertWindow.xaml.cs">
+      <DependentUpon>SupplyOfferConvertWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyOfferDisplayUserControl.xaml.cs">
+      <DependentUpon>SupplyOfferDisplayUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyOfferShowWindow.xaml.cs">
+      <DependentUpon>SupplyOfferShowWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyOfferUpdateWindow.xaml.cs">
+      <DependentUpon>SupplyOfferUpdateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyPremiumAddDialog.xaml.cs">
+      <DependentUpon>SupplyPremiumAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyRecallDialog.xaml.cs">
+      <DependentUpon>SupplyRecallDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyReportUserControl.xaml.cs">
+      <DependentUpon>SupplyReportUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyShowWindow.xaml.cs">
+      <DependentUpon>SupplyShowWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyUpdateWindow.xaml.cs">
+      <DependentUpon>SupplyUpdateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplyViews\SupplyWindow.xaml.cs">
+      <DependentUpon>SupplyWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Reports\ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplashScreen\SplashScreenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientAccountAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientAccountDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientAccountReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientAccountShowDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientUpdateDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientViews\ClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainViews\BackupDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainViews\LoginDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainViews\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MainViews\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Skins\MainSkin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainViews\RestoreBackupDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainViews\SupplyFutureDisplayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainViews\UserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SafeViews\SafeAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SafeViews\SafeDetailsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SafeViews\SafeDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SafeViews\SafeReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SafeViews\SafeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\CategoriesShowDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleCategoryInfromationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleOfferAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleOfferConvertWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleOfferDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleOfferShowWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleOfferUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleRecallDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleShowWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SalespersonAccountShowDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SalespersonAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SalespersonDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleViews\SaleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpendingViews\SpendingAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpendingViews\SpendingDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpendingViews\SpendingReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpendingViews\SpendingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\CategoryAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\CategoryInformationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\CategoryRequiredUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\CategoryUpdateDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\CategoryUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\CompanyAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\CompanyUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StoreViews\StoreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\CategoriesShowDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyCategoryInfromationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyFutureDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyOfferAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyOfferConvertWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyOfferDisplayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyOfferShowWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyOfferUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyPremiumAddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyRecallDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyShowWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplyViews\SupplyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ClientAccountReportDiscount.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ClientAccountReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RequiredCategoryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SupplyOfferReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SaleOfferReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SupplyReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SaleReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Reports\DS.xsc">
+      <DependentUpon>DS.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\DS.xss">
+      <DependentUpon>DS.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dark_bg.jpg" />
+    <Resource Include="Resources\Logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SalesICO.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\1.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

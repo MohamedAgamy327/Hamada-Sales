@@ -1,0 +1,28 @@
+﻿<Controls:MetroWindow x:Class="Sales.SplashScreen.SplashScreenWindow"
+          xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sales.SplashScreen"
+        mc:Ignorable="d"
+    Height="365" Width="436" WindowStartupLocation="CenterScreen" WindowStyle="None" 
+                       ShowTitleBar="False"
+                   ShowCloseButton="False" 
+       ShowInTaskbar="False" ResizeMode="NoResize" FlowDirection="LeftToRight">
+    <Controls:MetroWindow.Background>
+        <ImageBrush ImageSource="../Resources/Logo.jpg" TileMode="FlipY"/>
+    </Controls:MetroWindow.Background>
+    <Controls:MetroWindow.BindingGroup>
+        <BindingGroup/>
+    </Controls:MetroWindow.BindingGroup>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="1" FontSize="16"  FontFamily="calibri"   
+               Content="{Binding Source={x:Static local:MessageListener.Instance},Path=Message}" Foreground="#797575"></Label>
+    </Grid>
+</Controls:MetroWindow>

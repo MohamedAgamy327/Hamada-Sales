@@ -1,0 +1,60 @@
+﻿<Controls:MetroWindow
+       x:Class="Sales.Views.SaleViews.SaleWindow"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views = "clr-namespace:Sales.Views.SaleViews"
+        xmlns:viewModels = "clr-namespace:Sales.ViewModels.SaleViewModels" 
+        Title="المبيعات" 
+        Height="1000"
+        Width="1024"
+        ShowTitleBar="True"
+        WindowState="Maximized" 
+        FlowDirection="RightToLeft"
+        DataContext="{Binding Sale, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType = "{x:Type viewModels:SaleDisplayViewModel}">
+                <views:SaleDisplayUserControl/>
+            </DataTemplate>
+            <DataTemplate DataType = "{x:Type viewModels:SalespersonDisplayViewModel}">
+                <views:SalespersonDisplayUserControl/>
+            </DataTemplate>
+            <DataTemplate DataType = "{x:Type viewModels:SaleReportViewModel}">
+                <views:SaleReportUserControl/>
+            </DataTemplate>
+            <DataTemplate DataType = "{x:Type viewModels:SaleOfferDisplayViewModel}">
+                <views:SaleOfferDisplayUserControl/>
+            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\Skins\MainSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.8*" />
+            <RowDefinition Height="8.2*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="5">
+
+            <Controls:Tile Command="{Binding NavigateToView}" CommandParameter="SaleDisplay" Title="المبيعات" HorizontalTitleAlignment="Center" VerticalTitleAlignment="Center"   Controls:ControlsHelper.MouseOverBorderBrush="{DynamicResource BlackBrush}" Style="{StaticResource NormalTileStyle}"  >
+            </Controls:Tile>
+            <Controls:Tile Command="{Binding NavigateToView}" CommandParameter="SalespersonDisplay" Title="المناديب" HorizontalTitleAlignment="Center" VerticalTitleAlignment="Center"   Controls:ControlsHelper.MouseOverBorderBrush="{DynamicResource BlackBrush}" Style="{StaticResource NormalTileStyle}"  >
+            </Controls:Tile>
+            <Controls:Tile Command="{Binding NavigateToView}" CommandParameter="SaleReport" Title="تقارير المبيعات" HorizontalTitleAlignment="Center" VerticalTitleAlignment="Center"   Controls:ControlsHelper.MouseOverBorderBrush="{DynamicResource BlackBrush}" Style="{StaticResource NormalTileStyle}"  >
+            </Controls:Tile>
+
+            <Controls:Tile Command="{Binding NavigateToView}" CommandParameter="SaleOfferDisplay" Title="الطلبيات" HorizontalTitleAlignment="Center" VerticalTitleAlignment="Center"   Controls:ControlsHelper.MouseOverBorderBrush="{DynamicResource BlackBrush}" Style="{StaticResource NormalTileStyle}"  >
+            </Controls:Tile>
+
+        </StackPanel>
+
+        <Separator Grid.Row="1"  VerticalAlignment="Top"/>
+        <ContentControl Content="{Binding CurrentViewModel}"  Grid.Row="1"/>
+    </Grid>
+
+</Controls:MetroWindow>

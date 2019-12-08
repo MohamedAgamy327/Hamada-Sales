@@ -1,0 +1,102 @@
+﻿<Controls:MetroWindow
+   x:Class="Sales.Views.SupplyViews.SupplyOfferShowWindow"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+       xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="طلبيه" 
+        Height="560"
+        Width="1000"
+      ResizeMode="NoResize"
+       WindowState="{Binding State}" 
+        WindowStartupLocation="CenterScreen"
+        ShowTitleBar="True"
+     Background="{DynamicResource ControlBorderBrush}"
+        FlowDirection="RightToLeft"
+        DataContext="{Binding SupplyOfferShow, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\Skins\MainSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Margin="5,0">العميل</TextBlock>
+            <TextBox Width="300"  Margin="5,0"  IsEnabled="False" Text="{Binding SelectedSupplyOffer.Client.Name}" behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding PlacesSuggestions}" Style="{StaticResource TextBoxStyle}"></TextBox>
+            <TextBlock Style="{StaticResource TextBlockAddUpdateStyle}" Margin="5,0">التاريخ</TextBlock>
+            <DatePicker Margin="5,0" IsEnabled="False" VerticalAlignment="Center" Width="300" SelectedDate="{Binding SelectedSupplyOffer.Date}" Style="{StaticResource DatePickerStyle}"></DatePicker>
+        </StackPanel>
+        <DataGrid Grid.Row="1" Margin="5,0" 
+            ItemsSource="{Binding SupplyOfferCategories}"
+                SelectedItem="{Binding SelectedSupplyOfferCategory}"
+                  HeadersVisibility="All"
+                  SelectionUnit="FullRow"
+                  IsManipulationEnabled="False"
+                      CanUserDeleteRows="False"
+                      CanUserAddRows="False"
+                  AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True"  Header="الشركة" Width="1.5*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Company}" />
+                <DataGridTextColumn IsReadOnly="True"  Header="الصنف" Width="3*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Category}" />
+                <DataGridTextColumn IsReadOnly="True"  Header="التكلفة" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Cost}" />
+                <DataGridTextColumn IsReadOnly="True"  Header="الكمية" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Qty}" />
+                <DataGridTextColumn IsReadOnly="True"  Header="الإضافة %" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Tax}" />
+                <DataGridTextColumn IsReadOnly="True"  Header="الخصم %" Width="1*"  HeaderStyle="{StaticResource ColumnHeaderStyle}"   Binding="{Binding Discount}" />
+             
+            </DataGrid.Columns>
+
+            <DataGrid.Style>
+                <Style BasedOn="{StaticResource MetroDataGrid}"
+                       TargetType="{x:Type DataGrid}">
+                    <Setter Property="AlternatingRowBackground"
+                            Value="{DynamicResource GrayBrush10}" />
+                </Style>
+            </DataGrid.Style>
+        </DataGrid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockAddUpdateStyle}" >إجمالى التكلفة</TextBlock>
+            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1"   Margin="5,0" IsEnabled="False" Width="200"  Value="{Binding SelectedSupplyOffer.Cost}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"  Style="{StaticResource TextBlockAddUpdateStyle}" >الإجمالى بعد الضريبة</TextBlock>
+            <Controls:NumericUpDown Grid.Row="0" Grid.Column="3" IsEnabled="False" Width="200"  Value="{Binding SelectedSupplyOffer.CostAfterTax}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+            <TextBlock Grid.Row="0" Grid.Column="4"  Style="{StaticResource TextBlockAddUpdateStyle}" >إجمالى الخصومات</TextBlock>
+            <Controls:NumericUpDown Grid.Row="0" Grid.Column="5"  IsEnabled="False" Width="200"  Value="{Binding SelectedSupplyOffer.TotalDiscount}" Style="{StaticResource NumericUpDownStyle}"></Controls:NumericUpDown>
+
+        </Grid>
+
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
+            <Button   Command="{Binding Print}" Style="{StaticResource SquareButtonStyle}" Width="100" Height="30" >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="طباعة"  Style="{StaticResource TextBlockStyle}" Margin="10,0"></TextBlock>
+                    <iconPacks:PackIconFontAwesome Kind="Print"  />
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
+
+</Controls:MetroWindow>

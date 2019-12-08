@@ -1,0 +1,51 @@
+﻿<dialogs:CustomDialog x:Class="Sales.Views.MainViews.UserDialog"
+                      xmlns:Helpers="clr-namespace:Sales.Helpers"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+                      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      dialogs:DialogParticipation.Register="{Binding}"
+                      mc:Ignorable="d"
+                      Title="المستخدم"
+                      FlowDirection="RightToLeft"
+                      >
+    <StackPanel  Margin="10" >
+        <StackPanel.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="..\..\Skins\MainSkin.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackPanel.Resources>
+
+        <TextBlock Style="{StaticResource TextBlockStyle}" Margin="0,5">الاسم</TextBlock>
+        <TextBox IsEnabled="False"  Text="{Binding CurrentUser.ID, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding NamesSuggestions}" Style="{StaticResource TextBoxStyle}"></TextBox>
+        <TextBlock Style="{StaticResource TextBlockStyle}" Margin="0,5">الرقم السرى</TextBlock>
+        <PasswordBox Helpers:FocusExtension.IsFocused="{Binding IsFocused}"  Margin="0,5" Height="25" Helpers:Secure.Password="{Binding CurrentUser.Password, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" 
+	Controls:TextBoxHelper.UseFloatingWatermark="True" Style="{StaticResource Win8MetroPasswordBox}">
+            <PasswordBox.InputBindings>
+                <KeyBinding Command="{Binding Path=UpdateUser}" Key="Enter" />
+            </PasswordBox.InputBindings>
+        </PasswordBox>
+        <Separator Margin="0 15 0 0" />
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+            <Button Command="{Binding UpdateUser}" Style="{StaticResource SquareButtonStyle}" Width="100"    >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="تحديث"  Style="{StaticResource TextBlockStyle}" Margin="10,0"></TextBlock>
+                    <iconPacks:PackIconMaterial Kind="Update" />
+                </StackPanel>
+            </Button>
+            <Button IsCancel="True" Command="{Binding CloseDialog}" CommandParameter="User" Style="{StaticResource SquareButtonStyle}" Width="100" Margin="10,0" >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="إلغاء"  Style="{StaticResource TextBlockStyle}" Margin="10,0"></TextBlock>
+                    <iconPacks:PackIconModern Kind="Cancel" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+
+</dialogs:CustomDialog>

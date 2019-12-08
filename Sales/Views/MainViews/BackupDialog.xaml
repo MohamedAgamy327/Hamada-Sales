@@ -1,0 +1,46 @@
+﻿<dialogs:CustomDialog x:Class="Sales.Views.MainViews.BackupDialog"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      dialogs:DialogParticipation.Register="{Binding}"
+                      mc:Ignorable="d"
+                      Title="إنشاء نسخة إحتياطية"
+                      FlowDirection="RightToLeft"
+                      >
+    <StackPanel Name="pnl" >
+        <StackPanel.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="..\..\Skins\MainSkin.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackPanel.Resources>
+        <DockPanel >
+            <Button Command="{Binding BrowseFloder}" BorderThickness="0" Style="{DynamicResource MetroCircleButtonStyle}"
+                Margin="10 0" >
+                <iconPacks:PackIconOcticons Kind="Browser" Height="35" Width="35"/>
+            </Button>
+            <TextBox IsEnabled="False" Text="{Binding Url, ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxStyle}"/>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal"  Margin="0 10 0 0" >
+            <Button Name="btn" Command="{Binding Backup}" Style="{StaticResource SquareButtonStyle}" Width="100"    >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="حفظ"  Style="{StaticResource TextBlockStyle}" Margin="10,0"></TextBlock>
+                    <iconPacks:PackIconModern Kind="Save" />
+                </StackPanel>
+            </Button>
+            <Button IsCancel="True" Command="{Binding CloseDialog}" CommandParameter="Backup" Style="{StaticResource SquareButtonStyle}" Width="100" Margin="10,0" >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="إلغاء"  Style="{StaticResource TextBlockStyle}" Margin="10,0"></TextBlock>
+                    <iconPacks:PackIconModern Kind="Cancel" />
+                </StackPanel>
+            </Button>
+            <!--<TextBlock Text="{Binding Message}" VerticalAlignment="Center" FontSize="12" Margin="10,0" Foreground="{Binding MessageColor}"></TextBlock>-->
+        </StackPanel>
+    </StackPanel>
+
+
+</dialogs:CustomDialog>

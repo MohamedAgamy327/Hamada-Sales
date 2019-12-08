@@ -1,0 +1,132 @@
+﻿<dialogs:CustomDialog x:Class="Sales.Views.SupplyViews.SupplyPremiumAddDialog"
+                      xmlns:Helpers="clr-namespace:Sales.Helpers"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xml:lang="ar-EG"
+                         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                         xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      dialogs:DialogParticipation.Register="{Binding}"
+                      mc:Ignorable="d"
+                      Title="أقساط الفاتورة"
+                      FlowDirection="RightToLeft" 
+                     
+                      >
+    <StackPanel  >
+        <StackPanel.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="..\..\Skins\MainSkin.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackPanel.Resources>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10">
+            <TextBlock FontSize="18" Style="{StaticResource TextBlockStyle}" Margin="5,0">بيانات الفاتورة</TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10">
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">العميل:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.Client.Name}"></TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">التاريخ:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.Date, StringFormat={}\{0:yyyy/MM/dd \}}"></TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">التكلفة بعد الضريبة:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.CostAfterTax}"></TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10">
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">المدفوع نقداً:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.CashPaid}"></TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">المدفوع كخصم:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.DiscountPaid}"></TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">المتبقى:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.Change}"></TextBlock>
+        </StackPanel>
+        
+        <Separator Margin="0 10 0 0" />
+        <StackPanel Orientation="Horizontal" Margin="0,10">
+            <TextBlock FontSize="18" Style="{StaticResource TextBlockStyle}" Margin="5,0">بيانات اقساط الفاتورة</TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10">
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">المتبقى:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.SupplyFuture.Change}"></TextBlock>
+
+            <TextBlock  Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding PaidType}"></TextBlock>
+
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">تاريخ الدفع:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.SupplyFuture.Date, StringFormat={}\{0:yyyy/MM/dd \}}"></TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0">المكان:</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="5,0" Text="{Binding SelectedSupply.SupplyFuture.Place}"></TextBlock>
+        </StackPanel>
+        <StackPanel Visibility="{Binding Visibility}" Name="pnl" Orientation="Horizontal" Margin="0,5">
+            <TextBlock Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center" Margin="5,0">التاريخ</TextBlock>
+            <DatePicker SelectedDate="{Binding NewPremium.Date,UpdateSourceTrigger=PropertyChanged}"  Width="120"  Margin="5,0" Style="{StaticResource DatePickerStyle}">
+            </DatePicker>
+            <TextBlock Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center" Margin="5,0">البيان</TextBlock>
+            <ComboBox 
+Name="Focus" Helpers:FocusExtension.IsFocused="{Binding IsFocused}" IsEditable="True" Margin="5,0" Width="120" ItemsSource="{Binding Statements}" SelectedValuePath="ID" DisplayMemberPath="Statement" SelectedItem="{Binding SelectedStatement,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyle}">
+            </ComboBox>
+            <TextBlock VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}" Margin="5,0">مكان الدفع</TextBlock>
+            <TextBox Margin="5,0" Width="120"  Text="{Binding NewPremium.Place,ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding PlacesSuggestions}" Style="{StaticResource TextBoxStyle}" ></TextBox>
+            <TextBlock VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}" Margin="5,0">المبلغ</TextBlock>
+            <Controls:NumericUpDown Margin="5,0" Width="120"  Value="{Binding NewPremium.Amount,ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NumericUpDownStyle}" Minimum="0.01">
+                <Controls:NumericUpDown.InputBindings>
+                    <KeyBinding Command="{Binding Path=AddPremium}" Key="Enter" />
+                </Controls:NumericUpDown.InputBindings>
+            </Controls:NumericUpDown>
+            <Button Name="btn" FocusManager.FocusedElement="{Binding ElementName=Focus}" Command="{Binding AddPremium}" BorderThickness="0" Style="{DynamicResource MetroCircleButtonStyle}"
+                Margin="5,0" >
+                <iconPacks:PackIconEntypo Kind="AddToList" Height="30" Width="30"/>
+            </Button>
+        </StackPanel>
+        <DataGrid 
+            Margin="0,5"
+                ItemsSource="{Binding SupplyPremiums}"
+            SelectedItem="{Binding SelectedPremium}"
+            Height="200"
+            Width="700"
+                  HeadersVisibility="All"
+                  SelectionUnit="FullRow"
+                  IsManipulationEnabled="False"
+                      CanUserDeleteRows="False"
+                      CanUserAddRows="False"
+                  AutoGenerateColumns="False"
+                               >
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn IsReadOnly="True"  Header="البيان" Width="2*" HeaderStyle="{StaticResource ColumnHeaderStyle}"
+                                    Binding="{Binding Statement}"  />
+                <DataGridTextColumn IsReadOnly="True"  Header="التاريخ" Width="1*" HeaderStyle="{StaticResource ColumnHeaderStyle}"
+                                    Binding="{Binding Date , StringFormat={}\{0:yyyy/MM/dd \}}"  />
+                <DataGridTextColumn IsReadOnly="True"  Header="المكان" Width="1*" HeaderStyle="{StaticResource ColumnHeaderStyle}"
+                                    Binding="{Binding Place}"  />
+                <DataGridTextColumn IsReadOnly="True"  Header="المبلغ" Width="1*" HeaderStyle="{StaticResource ColumnHeaderStyle}"
+                                    Binding="{Binding Amount}"  />
+                <DataGridTemplateColumn  Header="حذف" Width="0.5*" HeaderStyle="{StaticResource ColumnHeaderStyle}" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.DeletePremium,
+                        RelativeSource={RelativeSource AncestorType={x:Type dialogs:CustomDialog}}}" Style="{DynamicResource MetroCircleButtonStyle}" BorderThickness="0" >
+                                <iconPacks:PackIconMaterial Kind="DeleteForever" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Separator Margin="0 10 0 0" />
+        <StackPanel Orientation="Horizontal" Margin="0,10" >
+            <Button IsCancel="True" Command="{Binding CloseDialog}" CommandParameter="Premium" Style="{StaticResource SquareButtonStyle}" Width="100" >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="إلغاء"  Style="{StaticResource TextBlockStyle}" Margin="10,0"></TextBlock>
+                    <iconPacks:PackIconModern Kind="Cancel" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</dialogs:CustomDialog>
